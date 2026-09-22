@@ -1,0 +1,251 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>SignMatch: Aligning Pose Latent Diffusion via Multi-dimensional Rewards for Sign Language Video Generation</title>
+<style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f5f7;
+      --text: #1a2230;
+      --muted: #66707f;
+      --line: #d8dde5;
+      --frame: #cfd5dd;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #10161f;
+        --text: #e9edf3;
+        --muted: #97a3b3;
+        --line: #273240;
+        --frame: #1c2632;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .page-header {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 24px 12px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      line-height: 1.3;
+      text-wrap: balance;
+    }
+
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+      display: grid;
+      gap: 26px;
+    }
+
+    .heads {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 12px 0;
+      background: var(--bg);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .pair {
+      display: grid;
+      gap: 10px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pair:last-child {
+      border-bottom: 0;
+    }
+
+    .vids {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .vids video {
+      width: 100%;
+      min-width: 0;
+      aspect-ratio: 224 / 272;
+      display: block;
+      border-radius: 4px;
+      background: var(--frame);
+    }
+
+    .lab {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .prompt {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.45;
+      text-wrap: balance;
+    }
+
+    video:focus-visible {
+      outline: 2px solid #d97a12;
+      outline-offset: 2px;
+    }
+  </style>
+
+  <header class="page-header">
+    <h1>SignMatch: Aligning Pose Latent Diffusion via Multi-dimensional Rewards for Sign Language Video Generation</h1>
+  </header>
+
+  <main class="wrap" aria-label="Sign language video comparison">
+    <div class="heads" aria-hidden="true">
+      <span>GT</span>
+      <span>SignViP</span>
+      <span>SignMatch</span>
+    </div>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="00_gt.mp4" aria-label="Ground truth example 1"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="00_signvip.mp4" aria-label="SignViP example 1"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="00_signmatch.mp4" aria-label="SignMatch example 1"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">in den alpen wird es dann sogar schneien .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="01_gt.mp4" aria-label="Ground truth example 2"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="01_signvip.mp4" aria-label="SignViP example 2"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="01_signmatch.mp4" aria-label="SignMatch example 2"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">die aussichten .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="02_gt.mp4" aria-label="Ground truth example 3"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="02_signvip.mp4" aria-label="SignViP example 3"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="02_signmatch.mp4" aria-label="SignMatch example 3"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">und nun die wettervorhersage für morgen donnerstag den einunddreißigsten märz .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="03_gt.mp4" aria-label="Ground truth example 4"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="03_signvip.mp4" aria-label="SignViP example 4"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="03_signmatch.mp4" aria-label="SignMatch example 4"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">heute nacht werte zwischen vierzehn grad an der see und vier grad an den alpen .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="04_gt.mp4" aria-label="Ground truth example 5"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="04_signvip.mp4" aria-label="SignViP example 5"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="04_signmatch.mp4" aria-label="SignMatch example 5"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">morgen reichen die temperaturen von einem grad im vogtland bis neun grad am oberrhein .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="05_gt.mp4" aria-label="Ground truth example 6"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="05_signvip.mp4" aria-label="SignViP example 6"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="05_signmatch.mp4" aria-label="SignMatch example 6"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">der wind weht meist schwach aus ost bis nordost .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="06_gt.mp4" aria-label="Ground truth example 7"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="06_signvip.mp4" aria-label="SignViP example 7"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="06_signmatch.mp4" aria-label="SignMatch example 7"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">guten abend liebe zuschauer .</p>
+    </section>
+
+    <section class="pair">
+      <div class="vids">
+        <video src="07_gt.mp4" aria-label="Ground truth example 8"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="07_signvip.mp4" aria-label="SignViP example 8"
+               controls muted loop playsinline preload="metadata"></video>
+        <video src="07_signmatch.mp4" aria-label="SignMatch example 8"
+               controls muted loop playsinline preload="metadata"></video>
+      </div>
+      <p class="lab"><span>GT</span><span>SignViP</span><span>SignMatch</span></p>
+      <p class="prompt" lang="de">besonders in flusstälern bildet sich nebel .</p>
+    </section>
+  </main>
+
+  <script>
+    // Preserve the original 0.5× playback speed.
+    document.querySelectorAll("video").forEach(function (video) {
+      function applyPlaybackRate() {
+        video.playbackRate = 0.5;
+      }
+
+      video.defaultPlaybackRate = 0.5;
+      applyPlaybackRate();
+
+      video.addEventListener("play", applyPlaybackRate);
+      video.addEventListener("loadedmetadata", applyPlaybackRate);
+    });
+  </script>
+
+</body></html>
